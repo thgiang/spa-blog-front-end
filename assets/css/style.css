@@ -1,18 +1,21 @@
 body {
   font-family: 'Roboto Condensed', sans-serif;
 }
+
 /* Overwrite Bootstrap CSS */
 .btn-lg, .btn-group-lg > .btn {
   font-size: 1rem;
   border-radius: 5px;
 }
+
 .btn-primary {
   color: #fff;
   background-color: #0e914b;
   border-color: #187945;
 }
-.btn-primary:hover, .btn-primary:not(:disabled):not(.disabled):active, .btn-primary:not(:disabled):not(.disabled).active, .show > .btn-primary.dropdown-toggle {
+
+.btn-primary:focus, .btn-primary.focus, .btn-primary:hover, .btn-primary:not(:disabled):not(.disabled):active, .btn-primary:not(:disabled):not(.disabled).active, .show > .btn-primary.dropdown-toggle {
   color: #fff;
-  background-color: #0fac58!important;
-  border-color: #0e914b!important;
+  background-color: #0fac58 !important;
+  border-color: #0e914b !important;
 }

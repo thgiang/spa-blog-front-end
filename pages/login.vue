@@ -10,26 +10,34 @@
                   <p class="text-white h2">ĐĂNG NHẬP GHTK PRIVATE BLOG</p>
                 </div>
                 <div class="position-relative form-side">
-                  <a href="/admin/user/login#" class="router-link-exact-active active"><img
-                    src="~assets/images/logo.png" width="100%"></a>
+                  <img src="~assets/images/logo.png" width="100%">
                   <hr/>
-                  <form class="av-tooltip tooltip-label-bottom">
+
+                  <div class="">
                     <fieldset class="form-group has-float-label mb-4">
                       <legend tabindex="-1" class="bv-no-focus-ring col-form-label pt-0">
-                        E-mail
+                        Username hoặc Email
                       </legend>
                       <div tabindex="-1" role="group" class="bv-no-focus-ring">
-                        <input type="text" class="form-control">
+                        <input type="text" class="form-control" v-model="username">
                       </div>
                     </fieldset>
                     <fieldset class="form-group has-float-label mb-4">
                       <legend tabindex="-1" class="bv-no-focus-ring col-form-label pt-0">Mật khẩu</legend>
                       <div tabindex="-1" role="group" class="bv-no-focus-ring">
-                        <input type="password" class="form-control">
+                        <input type="password" v-model="password" class="form-control">
                       </div>
                     </fieldset>
+                    <strong class="text-danger" v-if="warning !== ''">
+                        {{warning}}
+                    </strong>
+                    <strong v-else>
+                      &nbsp;
+                    </strong>
                     <div class="d-flex justify-content-end align-items-center">
-                      <button type="submit" class="btn btn-primary btn-lg btn-multiple-state btn-shadow col-md-12"><span
+
+                      <button @click="login()" type="submit"
+                              class="btn btn-primary btn-lg btn-multiple-state btn-shadow col-md-12"><span
                         class="spinner d-inline-block"><span class="bounce1"></span> <span class="bounce2"></span> <span
                         class="bounce3"></span></span> <span class="icon success"><i
                         class="simple-icon-check"></i></span>
@@ -41,7 +49,7 @@
                       </a>
                       -->
                     </div>
-                  </form>
+                  </div>
                 </div>
               </div>
             </div>
@@ -90,7 +98,7 @@
     width: 40%;
     background: url('~assets/images/login-balloon.jpg') no-repeat center top;
     background-size: cover;
-    padding: 80px 40px;
+    padding: 80px 25px;
   }
 
   .auth-card .form-side {
@@ -122,6 +130,60 @@
     head() {
       return {
         title: 'Đăng nhập'
+      }
+    },
+    watch: {
+      username: function() {
+        this.$store.commit('login/warning', "");
+      },
+      password: function() {
+        this.$store.commit('login/warning', "");
+      }
+    },
+    computed: {
+      username: {
+        get() {
+          return this.$store.state.login.username
+        },
+        set(value) {
+          this.$store.commit('login/username', value)
+        }
+      },
+      password: {
+        get() {
+          return this.$store.state.login.password
+        },
+        set(value) {
+          this.$store.commit('login/password', value)
+        }
+      },
+      warning: {
+        get() {
+          return this.$store.state.login.warning
+        },
+        set(value) {
+          this.$store.commit('login/warning', value)
+        }
+      }
+    },
+    methods: {
+      login() {
+        if (this.$store.state.username === '' || this.$store.state.password === '') {
+          alert("Bạn cần điền đủ Username và password");
+        }
+
+        let _store = this.$store;
+        this.$axios.get('/login?username=' + this.$store.state.login.username + '&password=' + this.$store.state.login.password)
+          .then(function (response) {
+            if (response.data.status === 'success') {
+              //_store.commit('warning', 'Login thành công!');
+            } else {
+              _store.commit('login/warning', response.data.message);
+            }
+          })
+          .catch(function (error) {
+            _store.commit('login/warning', error);
+          })
       }
     }
   }

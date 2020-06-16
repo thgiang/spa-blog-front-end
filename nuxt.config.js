@@ -39,7 +39,17 @@ export default {
   modules: [
     // Doc: https://bootstrap-vue.js.org
     'bootstrap-vue/nuxt',
+    '@nuxtjs/axios',
   ],
+  axios: {
+    // proxyHeaders: false
+    baseURL: 'http://127.0.0.1:8000/api/',
+    'Access-Control-Allow-Origin': '*',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    }
+  },
   /*
   ** Build configuration
   */
