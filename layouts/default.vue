@@ -59,11 +59,12 @@
 
   .sidebar {
     border-top: 1px solid #EEE;
-    margin-top: 10px;
+    margin-top: 0px;
     position: fixed;
     width: 120px;
     height: 100vh;
-    top: 80px;
+    padding-top: 90px;
+    top: 0;
     left: 0;
     background: #FFF;
   }
