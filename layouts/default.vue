@@ -1,55 +1,90 @@
 <template>
   <div>
-    <nuxt />
+    <div class="header">
+      <Header/>
+    </div>
+
+    <div class="sidebar">
+      <Sidebar/>
+    </div>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <div class="">
+            <nuxt/>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="footer">
+        <Footer/>
+      </div>
+    </div>
+
   </div>
 </template>
 
 <style>
-html {
-  font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+  html {
+    overflow-x: hidden;
+    font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI',
     Roboto, 'Helvetica Neue', Arial, sans-serif;
-  font-size: 16px;
-  word-spacing: 1px;
-  -ms-text-size-adjust: 100%;
-  -webkit-text-size-adjust: 100%;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
-  box-sizing: border-box;
-}
+    font-size: 16px;
+    word-spacing: 1px;
+    -ms-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    box-sizing: border-box;
+  }
 
-*,
-*:before,
-*:after {
-  box-sizing: border-box;
-  margin: 0;
-}
+  *,
+  *:before,
+  *:after {
+    box-sizing: border-box;
+    margin: 0;
+  }
 
-.button--green {
-  display: inline-block;
-  border-radius: 4px;
-  border: 1px solid #3b8070;
-  color: #3b8070;
-  text-decoration: none;
-  padding: 10px 30px;
-}
+  .main-content {
+    padding-top: 10px;
+    padding-left: 130px;
+  }
 
-.button--green:hover {
-  color: #fff;
-  background-color: #3b8070;
-}
+  .footer {
+    padding-left: 130px;
+  }
 
-.button--grey {
-  display: inline-block;
-  border-radius: 4px;
-  border: 1px solid #35495e;
-  color: #35495e;
-  text-decoration: none;
-  padding: 10px 30px;
-  margin-left: 15px;
-}
+  .sidebar {
+    border-top: 1px solid #EEE;
+    margin-top: 10px;
+    position: fixed;
+    width: 120px;
+    height: 100vh;
+    top: 80px;
+    left: 0;
+    background: #FFF;
+  }
 
-.button--grey:hover {
-  color: #fff;
-  background-color: #35495e;
-}
+  @media (max-width: 768px) {
+    .sidebar {
+      top: 0;
+      margin-top: 0;
+      display: block;
+      position: relative;
+      width: 100%;
+      height: unset;
+    }
+  }
 </style>
+<script>
+  import Header from "../components/Header";
+  import Footer from "../components/Footer";
+  import Sidebar from "../components/Sidebar";
+
+  export default {
+    components: {Sidebar, Footer, Header}
+  }
+</script>

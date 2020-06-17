@@ -127,6 +127,7 @@
 
 <script>
   export default {
+    layout: 'blank',
     auth: false,
     middleware: ['login'],
     head() {
@@ -177,8 +178,6 @@
           let response = await this.$auth.loginWith('local', {data: loginData})
           if (response.data.status === 'success') {
             await this.$router.push('/');
-
-            alert("Dang nhap thanh cong");
           } else {
             _store.commit('login/warning', response.data.message);
           }

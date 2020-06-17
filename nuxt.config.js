@@ -1,6 +1,6 @@
 export default {
   router: {
-    middleware: ['auth']
+    middleware: ['auth', 'get_categories']
   },
   mode: 'spa',
   /*
