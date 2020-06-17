@@ -3,7 +3,7 @@
   <div class="container blog-list">
     <div class="row">
       <div class="col-md-6 blog-item" v-for="(blog, index) in this.$store.state.blogs">
-        <div class="row" v-if="parseInt(index) >= currentPage * perpage && parseInt(index) <= (currentPage+1) * perpage">
+        <div class="row">
         <div class="col-4">
           <img :src="blog.thumbnail" width="100%"/>
         </div>
@@ -38,35 +38,7 @@
         title: 'Trang chủ - Blog GHTK'
       }
     },
-    created () {
-      window.addEventListener('scroll', this.handleScroll);
-    },
-    destroyed () {
-      window.removeEventListener('scroll', this.handleScroll);
-    },
     methods: {
-      handleScroll (event) {
-        let lastPage = this.currentPage;
-        let st = window.pageYOffset;
-        let lastScrollPosition = document.body.offsetHeight;
-        if(st === 0) {
-          this.currentPage = Math.max(1, this.currentPage - 1);
-        }
-        let sbHeight = window.innerHeight * (window.innerHeight / document.body.offsetHeight);
-        if(st + sbHeight >= window.innerHeight) {
-          this.currentPage = Math.min(this.currentPage + 1, this.$store.state.blogs.length / this.perpage);
-        }
-        if(lastPage !== this.currentPage) {
-          let firstBlog = document.getElementsByClassName("blog-item")[0];
-          window.scrollTo(0, firstBlog.offsetTop);
-
-          /*
-          this.$smoothScroll({
-            scrollTo: firstBlog
-          })
-           */
-        }
-      }
     }
   }
 </script>
