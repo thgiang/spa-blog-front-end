@@ -1,4 +1,7 @@
 export default {
+  router: {
+    middleware: ['auth']
+  },
   mode: 'spa',
   /*
   ** Headers of the page
@@ -40,14 +43,30 @@ export default {
     // Doc: https://bootstrap-vue.js.org
     'bootstrap-vue/nuxt',
     '@nuxtjs/axios',
+    '@nuxtjs/auth',
   ],
   axios: {
     // proxyHeaders: false
-    baseURL: 'http://127.0.0.1:8000/api/',
+    baseURL: 'http://127.0.0.1:8000/',
     'Access-Control-Allow-Origin': '*',
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
+    }
+  },
+  auth: {
+    strategies: {
+      local: {
+        endpoints: {
+          login: { url: '/api/auth/login', method: 'post', propertyName: 'user_info.api_token' },
+          logout: { url: '/api/auth/logout', method: 'get' },
+          user: { url: '/api/auth/user', method: 'get', propertyName: 'user_info' }
+        },
+        tokenRequired: true,
+        tokenType: 'bearer',
+        globalToken: true,
+        autoFetchUser: true
+      }
     }
   },
   /*

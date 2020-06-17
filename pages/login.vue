@@ -29,14 +29,14 @@
                       </div>
                     </fieldset>
                     <strong class="text-danger" v-if="warning !== ''">
-                        {{warning}}
+                      {{warning}}
                     </strong>
                     <strong v-else>
                       &nbsp;
                     </strong>
                     <div class="d-flex justify-content-end align-items-center">
 
-                      <button @click="login()" type="submit"
+                      <button @click="userLogin()" type="submit"
                               class="btn btn-primary btn-lg btn-multiple-state btn-shadow col-md-12"><span
                         class="spinner d-inline-block"><span class="bounce1"></span> <span class="bounce2"></span> <span
                         class="bounce3"></span></span> <span class="icon success"><i
@@ -127,16 +127,18 @@
 
 <script>
   export default {
+    auth: false,
+    middleware: ['login'],
     head() {
       return {
         title: 'Đăng nhập'
       }
     },
     watch: {
-      username: function() {
+      username: function () {
         this.$store.commit('login/warning', "");
       },
-      password: function() {
+      password: function () {
         this.$store.commit('login/warning', "");
       }
     },
@@ -167,24 +169,23 @@
       }
     },
     methods: {
-      login() {
-        if (this.$store.state.username === '' || this.$store.state.password === '') {
-          alert("Bạn cần điền đủ Username và password");
-        }
-
+      async userLogin() {
         let _store = this.$store;
-        this.$axios.get('/login?username=' + this.$store.state.login.username + '&password=' + this.$store.state.login.password)
-          .then(function (response) {
-            if (response.data.status === 'success') {
-              //_store.commit('warning', 'Login thành công!');
-            } else {
-              _store.commit('login/warning', response.data.message);
-            }
-          })
-          .catch(function (error) {
-            _store.commit('login/warning', error);
-          })
-      }
+        let _auth = this.$auth;
+        let loginData = {'username': this.$store.state.login.username, 'password': this.$store.state.login.password};
+        try {
+          let response = await this.$auth.loginWith('local', {data: loginData})
+          if (response.data.status === 'success') {
+            await this.$router.push('/');
+
+            alert("Dang nhap thanh cong");
+          } else {
+            _store.commit('login/warning', response.data.message);
+          }
+        } catch (error) {
+          _store.commit('login/warning', error);
+        }
+      },
     }
   }
 </script>

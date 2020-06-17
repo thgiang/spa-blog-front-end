@@ -1,9 +1,9 @@
 export const state = () => ({
-  counter: 0
+  api_token: ''
 })
 
 export const mutations = {
-  increment (state) {
-    state.counter++
+  setApiToken (state, api_token) {
+    state.api_token = api_token;
   }
 }

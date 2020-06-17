@@ -2,10 +2,10 @@
   <div class="container">
     <div class="row">
       <div class="col-md-3">
-
+        Sidebar {{this.$store.state.api_token}}
       </div>
       <div class="col-md-9">
-
+        Main
       </div>
     </div>
   </div>
