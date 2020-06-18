@@ -1,22 +1,17 @@
 <template>
   <div class="blog-list">
-    <!--
     <template v-for="(blog, index) in this.$store.state.blogs.data">
       <BlogItem v-bind:blog="blog" />
     </template>
-    -->
-    <TableVirtualScroller/>
   </div>
 </template>
 
 <script>
   import Logo from '~/components/Logo.vue'
   import BlogItem from "../components/BlogItem";
-  import TableVirtualScroller from "../components/TableVirtualScroller";
 
   export default {
     components: {
-      TableVirtualScroller,
       BlogItem,
       Logo
     },
