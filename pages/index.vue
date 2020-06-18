@@ -1,61 +1,43 @@
 <template>
-  <div style="">
-  <div class="container blog-list">
-    <div class="row">
-      <div class="col-md-6 blog-item" v-for="(blog, index) in this.$store.state.blogs">
-        <div class="row">
-        <div class="col-4">
-          <img :src="blog.thumbnail" width="100%"/>
-        </div>
-          <div class="col-8">
-            <h3>{{blog.title}}</h3>
-            <p>{{blog.description}}</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+  <div class="blog-list">
+    <template v-for="(blog, index) in this.$store.state.blogs.data">
+      <BlogItem v-bind:blog="blog" />
+    </template>
   </div>
 </template>
 
 <script>
   import Logo from '~/components/Logo.vue'
-  import vueSmoothScroll from 'vue2-smooth-scroll'
+  import BlogItem from "../components/BlogItem";
 
   export default {
     components: {
+      BlogItem,
       Logo
-    },
-    data() {
-      return {
-        perpage: 10,
-        currentPage: 10,
-        lastScrollTop: 0
-      }
     },
     head() {
       return {
         title: 'Trang chủ - Blog GHTK'
       }
     },
-    methods: {
-    }
+    methods: {}
   }
 </script>
 
 <style scoped>
   .blog-list {
-    min-height: 110vh;
-    margin-top: 20px!important;
     background: #FFF;
     font-size: 12px;
   }
+
   .blog-list h3 {
     font-size: 15px;
   }
+
   .blog-list p {
     text-align: justify;
   }
+
   .container {
     margin: 0 auto;
     display: flex;

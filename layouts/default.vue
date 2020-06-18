@@ -1,14 +1,14 @@
 <template>
   <div>
-    <div class="header">
+    <div class="header" id="header">
       <Header/>
     </div>
 
-    <div class="sidebar">
+    <div class="sidebar" id="sidebar">
       <Sidebar/>
     </div>
 
-    <div class="container">
+    <div class="container-fluid main-content">
       <div class="row">
         <div class="col-12">
           <div class="">
@@ -19,7 +19,7 @@
     </div>
 
     <div class="container">
-      <div class="footer">
+      <div class="footer" id="footer">
         <Footer/>
       </div>
     </div>
@@ -49,8 +49,8 @@
   }
 
   .main-content {
-    padding-top: 10px;
-    padding-left: 130px;
+    padding-top: 20px;
+    padding-left: 135px;
   }
 
   .footer {
@@ -58,18 +58,20 @@
   }
 
   .sidebar {
-    border-top: 1px solid #EEE;
+    border-right: 1px solid #EEE;
     margin-top: 0px;
     position: fixed;
     width: 120px;
     height: 100vh;
-    padding-top: 90px;
     top: 0;
     left: 0;
     background: #FFF;
   }
 
   @media (max-width: 768px) {
+    .main-content {
+      padding: 10px 0;
+    }
     .sidebar {
       top: 0;
       margin-top: 0;
@@ -77,6 +79,8 @@
       position: relative;
       width: 100%;
       height: unset;
+      border-top: 1px solid #EEE;
+      padding-top: 0;
     }
   }
 </style>
@@ -86,6 +90,6 @@
   import Sidebar from "../components/Sidebar";
 
   export default {
-    components: {Sidebar, Footer, Header}
+    components: {Sidebar, Footer, Header},
   }
 </script>
