@@ -10,7 +10,9 @@ a:hover {
   color: #0e914b;
   text-decoration: none;
 }
-
+.nuxt-link-exact-active {
+  color: #01b153!important;
+}
 /* Overwrite Bootstrap CSS */
 .btn-lg, .btn-group-lg > .btn {
   font-size: 1rem;

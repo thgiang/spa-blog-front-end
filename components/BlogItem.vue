@@ -31,10 +31,13 @@
   }
   .blog-item h3 {
     font-size: 16px;
+    text-transform: uppercase;
+    font-weight: bold;
   }
   .extra-info {
     color: #909090;
     font-size: 14px;
+    text-transform: uppercase;
   }
   @media (max-width: 768px) {
     .blog-item {

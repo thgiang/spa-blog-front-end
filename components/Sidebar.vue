@@ -1,13 +1,13 @@
 <template>
   <div>
-    <a href="/" v-if="showingSmallLogo">
+    <!--<a href="/" v-if="showingSmallLogo">-->
+    <a href="/">
     <img src="~assets/images/small_logo.png" title="Small logo" alt="Small logo" class="small-logo"/>
     </a>
     <ul>
       <template v-for="(category, index) in this.$store.state.categories">
         <li v-bind:class="(index%3 === 2)?'no-border-right':''">
-          <!--<nuxt-link to="/category/{{category.id}}/{{category.slug}}">{{category.name}}</nuxt-link>-->
-          <nuxt-link to="">
+          <nuxt-link :to="'/category/'+category.id">
             <div class="category-icon">
               <svg class="bi bi-droplet-half" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor"
                    xmlns="http://www.w3.org/2000/svg">
@@ -88,9 +88,11 @@
       width: calc(100% / 3);
       padding: 0;
     }
-
     li:first-child {
       border-top: none;
+    }
+    .small-logo {
+      display: none;
     }
   }
 </style>

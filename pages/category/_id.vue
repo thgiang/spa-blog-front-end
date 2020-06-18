@@ -9,10 +9,10 @@
       <div class="row">
         <div class="col-md-12 text-center">
           Trang {{this.currentPage}} trên tổng số {{this.$store.state.blogs.last_page}} trang.<br/>
-          <nuxt-link :to="'/?page='+prevPage" v-if="prevPage !== 0">Trang trước
+          <nuxt-link :to="'/category/'+this.$route.params.id+'/?page='+prevPage" v-if="prevPage !== 0">Trang trước
           </nuxt-link>
           &nbsp;
-          <nuxt-link :to="'/?page='+nextPage" v-if="nextPage !== 0">Trang tiếp
+          <nuxt-link :to="'/category/'+this.$route.params.id+'/?page='+nextPage" v-if="nextPage !== 0">Trang tiếp
           </nuxt-link>
         </div>
       </div>
@@ -39,7 +39,7 @@
     },
     head() {
       return {
-        title: 'Trang chủ - Blog GHTK'
+        title: this.title + ' - Blog GHTK'
       }
     },
     updated() {
@@ -60,7 +60,6 @@
     }
   }
 </script>
-
 <style scoped>
   .blog-list {
     font-size: 12px;

@@ -1,6 +1,7 @@
 export default {
   router: {
-    middleware: ['auth', 'get_categories', 'get_blogs']
+    middleware: ['auth', 'get_categories', 'get_blogs'],
+    linkActiveClass: 'active-link'
   },
   mode: 'spa',
   /*
@@ -21,7 +22,7 @@ export default {
   /*
   ** Customize the progress-bar color
   */
-  loading: {color: '#fff'},
+  loading: {color: 'green', height: '5px'},
   /*
   ** Global CSS
   */

@@ -1,5 +1,17 @@
 export default function (context) {
-  context.app.$axios.get('api/blog?per_page=200')
+  let per_page = 10;
+  let url = 'api/blog?per_page='+per_page;
+  if(context.route.params.id) {
+    if(context.route.params.id === "0") {
+      return context.redirect('/');
+    }
+    url = 'api/category/'+context.route.params.id+'?per_page='+per_page;
+  }
+  if(context.route.query.hasOwnProperty('page') && parseInt(context.route.query['page']) > 0) {
+    url += '&page='+context.route.query['page'];
+  }
+
+  context.app.$axios.get(url)
     .then((response) => {
       context.store.commit('setBlogs', response.data)
     }, (error) => {
