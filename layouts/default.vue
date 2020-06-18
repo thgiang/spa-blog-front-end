@@ -8,7 +8,7 @@
       <Sidebar/>
     </div>
 
-    <div class="container-fluid main-content">
+    <div class="container main-content">
       <div class="row">
         <div class="col-12">
           <div class="">
@@ -50,11 +50,11 @@
 
   .main-content {
     padding-top: 20px;
-    padding-left: 135px;
+    /*padding-left: 135px;*/
   }
 
   .footer {
-    padding-left: 135px;
+    /*padding-left: 135px;*/
   }
 
   .sidebar {

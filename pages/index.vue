@@ -76,7 +76,10 @@
   }
 
   .blog-list h3 {
-    font-size: 15px;
+    font-size: 16px;
+    text-transform: uppercase;
+    font-weight: bold;
+    line-height: 23px;
   }
 
   .blog-list p {

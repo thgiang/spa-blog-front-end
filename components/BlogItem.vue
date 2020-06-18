@@ -22,7 +22,7 @@
 </script>
 <style>
   .blog-item {
-    width: calc(50% - 20px);
+    width: calc(100% - 20px);
     margin: 10px;
     float: left;
     padding: 10px;
