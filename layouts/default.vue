@@ -18,7 +18,7 @@
       </div>
     </div>
 
-    <div class="container">
+    <div class="container-fluid text-center">
       <div class="footer" id="footer">
         <Footer/>
       </div>
@@ -54,7 +54,7 @@
   }
 
   .footer {
-    padding-left: 130px;
+    padding-left: 135px;
   }
 
   .sidebar {
@@ -69,7 +69,7 @@
   }
 
   @media (max-width: 768px) {
-    .main-content {
+    .main-content, .footer {
       padding: 10px 0;
     }
     .sidebar {

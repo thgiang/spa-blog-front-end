@@ -50,6 +50,7 @@
     }
     .user-info {
       line-height: unset;
+      margin-top: 10px;
       padding-top: 5px;
       border-top: 1px solid #EEE;
     }
