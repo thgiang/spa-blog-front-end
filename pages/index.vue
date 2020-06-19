@@ -25,6 +25,7 @@
   import BlogItem from "~/components/BlogItem";
 
   export default {
+    middleware: ['get_blogs'],
     components: {
       BlogItem,
       Logo

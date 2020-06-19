@@ -2,12 +2,63 @@
   <div>
     <!--<a href="/" v-if="showingSmallLogo">-->
     <a href="/">
-    <img src="~assets/images/small_logo.png" title="Small logo" alt="Small logo" class="small-logo"/>
+      <img src="~assets/images/small_logo.png" title="Small logo" alt="Small logo" class="small-logo"/>
     </a>
+    <ul v-if="this.$store.state.auth.user.role === 'admin' || this.$store.state.auth.user.role === 'writer'" class="manager-menu">
+      <li v-if="this.$store.state.auth.user.role === 'admin'">
+        <span class="admin-protect-icon">
+          Admin
+        </span>
+        <nuxt-link to="/user-manager">
+          <div class="category-icon">
+            <svg class="bi bi-people-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor"
+                 xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd"
+                    d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-5.784 6A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216zM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z"/>
+            </svg>
+          </div>
+          QL thành viên
+        </nuxt-link>
+      </li>
+      <li class="wtf-mobile-issue">
+        <span class="admin-protect-icon">
+          Writer
+        </span>
+        <nuxt-link to="/blog-manager">
+          <div class="category-icon">
+            <svg class="bi bi-pencil-square" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor"
+                 xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+              <path fill-rule="evenodd"
+                    d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+            </svg>
+          </div>
+          QL bài viết
+        </nuxt-link>
+      </li>
+      <li class="no-border-right">
+        <span class="admin-protect-icon">
+          Admin
+        </span>
+        <nuxt-link to="/comment-manager">
+          <div class="category-icon">
+            <svg class="bi bi-chat-dots-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor"
+                 xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd"
+                    d="M16 8c0 3.866-3.582 7-8 7a9.06 9.06 0 0 1-2.347-.306c-.584.296-1.925.864-4.181 1.234-.2.032-.352-.176-.273-.362.354-.836.674-1.95.77-2.966C.744 11.37 0 9.76 0 8c0-3.866 3.582-7 8-7s8 3.134 8 7zM5 8a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+            </svg>
+          </div>
+          QL comment
+        </nuxt-link>
+      </li>
+    </ul>
+
     <ul>
       <template v-for="(category, index) in this.$store.state.categories">
         <li v-bind:class="(index%3 === 2)?'no-border-right':''">
-          <nuxt-link :to="{name: 'category-id', params: {id: category.id}}" :class="{'nuxt-link-exact-active active-link': isTabActive(category.id) }">
+          <nuxt-link :to="{name: 'category-id', params: {id: category.id}}"
+                     :class="{'nuxt-link-exact-active active-link': isTabActive(category.id) }">
             <div class="category-icon">
               <svg class="bi bi-droplet-half" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor"
                    xmlns="http://www.w3.org/2000/svg">
@@ -33,38 +84,57 @@
         showingSmallLogo: false
       }
     },
-    created () {
+    mounted() {
+      console.log(this.$store.state.auth.user);
+    },
+    created() {
       window.addEventListener('scroll', this.handleScroll);
     },
-    destroyed () {
+    destroyed() {
       window.removeEventListener('scroll', this.handleScroll);
     },
     methods: {
       isTabActive(category_id) {
-        if(this.$route.name === 'blog-id' && this.$store.state.blog.blog.cat_id === category_id) {
+        if (this.$route.name === 'blog-id' && this.$store.state.blog.blog.cat_id === category_id) {
           return true;
         }
         return false;
       },
-      handleScroll (event) {
+      handleScroll(event) {
         this.showingSmallLogo = window.pageYOffset > 100;
       }
     }
   }
 </script>
 <style scoped>
+  .manager-menu li {
+    position: relative;
+  }
+  .manager-menu .admin-protect-icon {
+    position: absolute;
+    right: 0;
+    top: 0;
+    font-size: 10px;
+    text-transform: uppercase;
+    background: #007339;
+    padding: 1px 3px;
+    color: #FFF;
+    border-radius: 1px;
+  }
   .small-logo {
     width: 60px;
     height: 60px;
     display: block;
     margin: 15px auto;
   }
+
   ul {
     list-style: none;
     margin: 0;
     padding: 0;
     background: #FFF;
   }
+
   li {
     padding: 20px 5px;
     width: 120px;
@@ -80,6 +150,7 @@
   li a {
     color: gray;
   }
+
   li a:hover {
     color: #000;
   }
@@ -89,14 +160,20 @@
   }
 
   @media (max-width: 768px) {
+    .wtf-mobile-issue {
+      margin-left: -5px;
+      margin-right: -5px;
+    }
     li {
       display: inline-block;
       width: calc(100% / 3);
       padding: 0;
     }
+
     li:first-child {
       border-top: none;
     }
+
     .small-logo {
       display: none;
     }
