@@ -84,9 +84,6 @@
         showingSmallLogo: false
       }
     },
-    mounted() {
-      console.log(this.$store.state.auth.user);
-    },
     created() {
       window.addEventListener('scroll', this.handleScroll);
     },
