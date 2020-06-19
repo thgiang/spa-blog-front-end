@@ -55,6 +55,9 @@
 
   .footer {
     /*padding-left: 135px;*/
+    border-top: 1px solid #DDD;
+    margin-top: 20px;
+    padding: 5px 0;
   }
 
   .sidebar {

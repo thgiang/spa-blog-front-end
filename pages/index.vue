@@ -9,10 +9,10 @@
       <div class="row">
         <div class="col-md-12 text-center">
           Trang {{this.currentPage}} trên tổng số {{this.$store.state.blogs.last_page}} trang.<br/>
-          <nuxt-link :to="'/?page='+prevPage" v-if="prevPage !== 0">Trang trước
+          <nuxt-link :to="{ path: '/', query: { page: prevPage}}" v-if="prevPage !== 0">Trang trước
           </nuxt-link>
           &nbsp;
-          <nuxt-link :to="'/?page='+nextPage" v-if="nextPage !== 0">Trang tiếp
+          <nuxt-link :to="{ path: '/', query: { page: nextPage}}" v-if="nextPage !== 0">Trang tiếp
           </nuxt-link>
         </div>
       </div>

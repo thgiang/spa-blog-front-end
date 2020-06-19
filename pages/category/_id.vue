@@ -9,10 +9,10 @@
       <div class="row">
         <div class="col-md-12 text-center">
           Trang {{this.currentPage}} trên tổng số {{this.$store.state.blogs.last_page}} trang.<br/>
-          <nuxt-link :to="'/category/'+this.$route.params.id+'/?page='+prevPage" v-if="prevPage !== 0">Trang trước
+          <nuxt-link :to="{ name: 'category-id', params: {id: $route.params.id}, query: { page: prevPage}}" v-if="prevPage !== 0">Trang trước
           </nuxt-link>
           &nbsp;
-          <nuxt-link :to="'/category/'+this.$route.params.id+'/?page='+nextPage" v-if="nextPage !== 0">Trang tiếp
+          <nuxt-link :to="{ name: 'category-id', params: {id: $route.params.id}, query: { page: nextPage}}" v-if="nextPage !== 0">Trang tiếp
           </nuxt-link>
         </div>
       </div>
@@ -25,6 +25,7 @@
   import BlogItem from "~/components/BlogItem";
 
   export default {
+    middleware: ['auth', 'get_categories', 'get_blogs'],
     components: {
       BlogItem,
       Logo
@@ -41,6 +42,9 @@
       return {
         title: this.title + ' - Blog GHTK'
       }
+    },
+    mounted() {
+      this.$store.commit('setCurrentCategory', this.$route.params.id);
     },
     updated() {
       if (this.$route.query.hasOwnProperty('page') && this.$route.query['page'] > 0) {

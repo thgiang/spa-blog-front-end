@@ -1,6 +1,6 @@
 export default {
   router: {
-    middleware: ['auth', 'get_categories', 'get_blogs'],
+    middleware: ['auth', 'get_categories'],
     linkActiveClass: 'active-link'
   },
   mode: 'spa',

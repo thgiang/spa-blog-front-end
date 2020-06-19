@@ -7,7 +7,7 @@
     <ul>
       <template v-for="(category, index) in this.$store.state.categories">
         <li v-bind:class="(index%3 === 2)?'no-border-right':''">
-          <nuxt-link :to="'/category/'+category.id">
+          <nuxt-link :to="{name: 'category-id', params: {id: category.id}}" :class="{'nuxt-link-exact-active active-link': isTabActive(category.id) }">
             <div class="category-icon">
               <svg class="bi bi-droplet-half" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor"
                    xmlns="http://www.w3.org/2000/svg">
@@ -40,6 +40,12 @@
       window.removeEventListener('scroll', this.handleScroll);
     },
     methods: {
+      isTabActive(category_id) {
+        if(this.$route.name === 'blog-id' && this.$store.state.blog.blog.cat_id === category_id) {
+          return true;
+        }
+        return false;
+      },
       handleScroll (event) {
         this.showingSmallLogo = window.pageYOffset > 100;
       }

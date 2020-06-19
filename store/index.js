@@ -1,7 +1,8 @@
 export const state = () => ({
   api_token: '',
   categories: [],
-  blogs: []
+  blogs: [],
+  current_category: 0,
 })
 
 export const mutations = {
@@ -13,5 +14,8 @@ export const mutations = {
   },
   setBlogs (state, blogs) {
     state.blogs = blogs;
-  }
+  },
+  setCurrentCategory (state, current_category) {
+    state.current_cat_id = current_category;
+  },
 }
