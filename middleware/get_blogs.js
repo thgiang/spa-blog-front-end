@@ -16,5 +16,5 @@ export default function (context) {
       context.store.commit('setBlogs', response.data)
     }, (error) => {
       console.log(error);
-    });
+    })
 }

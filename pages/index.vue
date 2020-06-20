@@ -8,12 +8,22 @@
     <div class="blog-page">
       <div class="row">
         <div class="col-md-12 text-center">
+          <paginate
+            :page-count="this.$store.state.blogs.last_page"
+            :click-handler="goToPage"
+            :prev-text="'Trang trước'"
+            :next-text="'Trang tiếp'"
+            :container-class="'my-pagination'">
+          </paginate>
+
+          <!--
           Trang {{this.currentPage}} trên tổng số {{this.$store.state.blogs.last_page}} trang.<br/>
           <nuxt-link :to="{ path: '/', query: { page: prevPage}}" v-if="prevPage !== 0">Trang trước
           </nuxt-link>
           &nbsp;
           <nuxt-link :to="{ path: '/', query: { page: nextPage}}" v-if="nextPage !== 0">Trang tiếp
           </nuxt-link>
+          -->
         </div>
       </div>
     </div>
@@ -22,13 +32,15 @@
 
 <script>
   import Logo from '~/components/Logo.vue'
-  import BlogItem from "~/components/BlogItem";
+  import BlogItem from "~/components/BlogItem"
+  import Paginate from 'vuejs-paginate'
 
   export default {
     middleware: ['get_blogs'],
     components: {
       BlogItem,
-      Logo
+      Logo,
+      Paginate
     },
     data() {
       return {
@@ -36,6 +48,11 @@
         currentPage: 1,
         nextPage: 0,
         prevPage: 0,
+      }
+    },
+    methods: {
+      goToPage(p) {
+        this.$router.push({ name: 'index', query: { page: p} })
       }
     },
     head() {

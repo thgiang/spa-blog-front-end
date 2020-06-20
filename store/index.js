@@ -1,7 +1,9 @@
 export const state = () => ({
   api_token: '',
   categories: [],
-  blogs: [],
+  blogs: {
+    last_page: 10
+  },
   current_category: 0,
 })
 

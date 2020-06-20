@@ -13,6 +13,26 @@ a:hover {
 .nuxt-link-exact-active {
   color: #01b153!important;
 }
+.my-pagination {
+  list-style: none;
+}
+.my-pagination li {
+  display: inline-block;
+  color: #FFF;
+}
+.my-pagination li a {
+  color: #EEE;
+  padding: 3px 10px;
+  border: 1px solid #FFF;
+  background: #41ba7c;
+}
+.my-pagination li a:focus {
+  outline: none;
+  color: white;
+}
+.my-pagination .active {
+  background: #000;
+}
 /* Overwrite Bootstrap CSS */
 .btn-lg, .btn-group-lg > .btn {
   font-size: 1rem;
@@ -30,3 +50,4 @@ a:hover {
   background-color: #0fac58 !important;
   border-color: #0e914b !important;
 }
+
