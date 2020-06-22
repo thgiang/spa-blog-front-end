@@ -1,5 +1,8 @@
 <template>
-  <h1>Blog manager</h1>
+  <div class="blog-manager">
+    <h1>Vui lòng quay lại trang chủ, dùng chức năng tìm kiếm bài viết, nếu bạn có quyền sửa bài viết, sẽ có nút (Sửa) bên cạnh của tiêu đề</h1>
+  </div>
+
 </template>
 <script>
   export default {
@@ -10,3 +13,9 @@
     }
   }
 </script>
+<style>
+.blog-manager{
+  background: #FFF;
+  padding: 10px;
+}
+</style>

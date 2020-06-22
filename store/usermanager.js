@@ -2,7 +2,13 @@ export const state = () => ({
   users: {
     last_page: 0
   },
-  user: {}
+  user: {
+    username: '',
+    name: '',
+    email: '',
+    role: '',
+    password: ''
+  }
 })
 
 export const mutations = {

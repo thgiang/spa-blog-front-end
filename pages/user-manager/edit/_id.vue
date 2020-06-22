@@ -39,7 +39,7 @@
     computed: {
       name: {
         get() {
-          return this.$store.state.usernamager.user.name
+          return this.$store.state.usermanager.user.name
         },
         set(value) {
           this.$store.commit('usermanager/setUserName', value)

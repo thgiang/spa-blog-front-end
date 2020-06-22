@@ -13,7 +13,7 @@
 </template>
 <script>
   export default {
-    middleware: ['auth', 'get_categories', 'get_blog'],
+    middleware: ['get_blog'],
     head() {
       return {
         title: this.$store.state.blog.blog.title + ' - Blog GHTK'

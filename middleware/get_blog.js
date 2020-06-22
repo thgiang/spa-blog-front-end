@@ -11,7 +11,11 @@ export default function (context) {
 
   context.app.$axios.get(url)
     .then((response) => {
-      context.store.commit('blog/setBlog', response.data)
+      if(response.data.id === parseInt(context.route.params.id)) {
+        context.store.commit('blog/setBlog', response.data)
+      } else {
+        return context.redirect('/');
+      }
     }, (error) => {
       console.log(error);
     });
