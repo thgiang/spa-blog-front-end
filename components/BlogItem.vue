@@ -7,6 +7,9 @@
         </nuxt-link>
       </div>
       <div class="col-8">
+        <div v-if="this.$store.state.auth.user.role === 'admin' || (this.$store.state.auth.user.role === 'writer' && blog.user_id === this.$store.state.auth.user.id)" class="float-right">
+          <nuxt-link :to="{name: 'blog-manager-edit-id', params: {id: blog.id}}" class="bg-danger p-1 text-white">Sửa bài viết</nuxt-link>
+        </div>
         <h3>
           <nuxt-link :to="{ name: 'blog-id', params: {id: blog.id}}">
             {{blog.title}}

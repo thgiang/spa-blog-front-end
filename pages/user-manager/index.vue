@@ -1,7 +1,7 @@
 <template>
   <div class="user-manager">
     <h1>{{ this.title }}</h1>
-
+    <nuxt-link :to="{name: 'user-manager-create'}" class="btn btn-primary float-right">Thêm thành viên</nuxt-link>
     <form class="form-inline" method="get" @submit="searchNow">
       <div class="form-group mb-2">
         <label for="keyword" class="sr-only">Từ khóa</label>

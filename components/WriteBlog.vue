@@ -42,6 +42,7 @@
 <script>
 let ClassicEditor;
 let CKEditor;
+
 require("@ckeditor/ckeditor5-build-classic/build/translations/vi");
 ClassicEditor = require("@ckeditor/ckeditor5-build-classic");
 CKEditor = require("@ckeditor/ckeditor5-vue");
@@ -66,12 +67,17 @@ export default {
         /*
         language: "vi-vn",
          */
+        alignment: {
+          options: [ 'left', 'right', 'center']
+        },
         toolbar: {
           items: [
+            "alignment",
             "bold",
             "italic",
             "|",
-            "link"
+            "link",
+            "alignment:left", "alignment:right", "alignment:center", "alignment:justify"
           ]
         }
       },
@@ -95,6 +101,7 @@ export default {
             position: 'bottom right',
             text: 'Lưu thông tin thành viên thành công'
           });
+          this.$router.push({name: 'blog-id', params: {id: response.data.data.id}});
         } else {
           this.$notify({
             group: 'notification',

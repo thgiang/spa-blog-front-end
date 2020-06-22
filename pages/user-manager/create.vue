@@ -12,7 +12,7 @@
       </div>
       <div class="form-group">
         <label for="email">Email</label>
-        <input type="email" class="form-control" name="email" id="email" placeholder="Enter email" v-model="user.email">
+        <input type="email" class="form-control" name="email" id="email" placeholder="giangth@ghtk.vn" v-model="user.email">
       </div>
       <div class="form-group">
         <label for="role">Quyền hạn</label>

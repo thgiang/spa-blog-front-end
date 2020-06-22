@@ -8,7 +8,7 @@
       </div>
       <div class="form-group">
         <label for="email">Email</label>
-        <input type="email" class="form-control" name="email" id="email" placeholder="Enter email" v-model="email">
+        <input type="email" class="form-control" name="email" id="email" placeholder="giangth@ghtk.vn" v-model="email">
       </div>
       <div class="form-group">
         <label for="role">Quyền hạn</label>
