@@ -1,5 +1,14 @@
 <template>
   <div>
+    <div class="search-area">
+      <div class="row">
+        <div class="col-md-12">
+          <Searchbar></Searchbar>
+        </div>
+      </div>
+    </div>
+
+
     <div class="blog-list">
       <template v-for="(blog, index) in this.$store.state.blogs.data">
         <BlogItem v-bind:blog="blog"/>
@@ -35,13 +44,15 @@
   import Logo from '~/components/Logo.vue'
   import BlogItem from "~/components/BlogItem"
   import Paginate from 'vuejs-paginate'
+  import Searchbar from '~/components/Searchbar.vue'
 
   export default {
     middleware: ['get_blogs'],
     components: {
       BlogItem,
       Logo,
-      Paginate
+      Paginate,
+      Searchbar
     },
     data() {
       return {
@@ -69,6 +80,9 @@
 </script>
 
 <style scoped>
+.search-area {
+  margin: 10px;
+}
   .blog-list {
     font-size: 12px;
     overflow: hidden;
