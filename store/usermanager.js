@@ -1,5 +1,7 @@
 export const state = () => ({
-  users: [],
+  users: {
+    last_page: 0
+  },
   user: {}
 })
 

@@ -1,6 +1,6 @@
 <template>
   <div class="user-manager">
-    <h1>{{this.title}}</h1>
+    <h1>{{ this.title }}</h1>
 
     <form class="form-inline" method="get" @submit="searchNow">
       <div class="form-group mb-2">
@@ -29,6 +29,15 @@
     </table>
     <div class="row" v-if="this.keyword === ''">
       <div class="col-md-12 text-center">
+        <paginate
+          v-model="currentPage"
+          :page-count="parseInt(this.$store.state.usermanager.users.last_page)"
+          :click-handler="goToPage"
+          :prev-text="'Trang trước'"
+          :next-text="'Trang tiếp'"
+          :container-class="'my-pagination'">
+        </paginate>
+        <!--
         Trang {{currentPage}} trên tổng số {{this.$store.state.usermanager.users.last_page}} trang.<br/>
         <nuxt-link :to="{ path: '/user-manager', query: { page: prevPage}}"
                    v-if="prevPage !== 0 && prevPage !== currentPage">Trang trước
@@ -37,76 +46,72 @@
         <nuxt-link :to="{ path: '/user-manager', query: { page: nextPage}}"
                    v-if="nextPage > 1 && nextPage !== currentPage">Trang tiếp
         </nuxt-link>
+        -->
       </div>
     </div>
   </div>
 </template>
 <script>
-  export default {
-    middleware: ['get_users'],
-    data() {
-      return {
-        title: "Quản lý thành viên",
-        currentPage: 1,
-        nextPage: 0,
-        prevPage: 0,
-        keyword: "",
-      }
+import Paginate from 'vuejs-paginate'
+
+export default {
+  middleware: ['get_users'],
+  components: {
+    Paginate
+  },
+  data() {
+    return {
+      title: "Quản lý thành viên",
+      currentPage: 1,
+      keyword: ""
+    }
+  },
+  head() {
+    return {
+      title: this.title
+    }
+  },
+  methods: {
+    goToPage(p) {
+      this.$router.push({ name: 'user-manager', query: { page: p} })
     },
-    head() {
-      return {
-        title: this.title
-      }
-    },
-    methods: {
-      deleteUser(user) {
-        let confirm = window.confirm("Bạn có chắc muốn xóa tài khoản " + user.username + " không?");
-        if (confirm) {
-          this.$axios.get('/api/user-manager/delete/' + user.id).then(response => {
-            if(response.data.status === "success") {
-              window.location.reload();
-            } else {
-              alert("Lỗi: "+ response.data.message);
-            }
-          }).catch(error => {
-              alert("Lỗi khi xóa: "+error);
-          })
-        }
-      },
-      searchNow(e) {
-        this.title = "Tìm kiếm thành viên";
-        this.$axios.get('/api/user-manager/search?keyword=' + this.keyword).then(response => {
-          if(response.data.status === "success") {
-            this.$store.commit('usermanager/setUsers', response.data.data);
+    deleteUser(user) {
+      let confirm = window.confirm("Bạn có chắc muốn xóa tài khoản " + user.username + " không?");
+      if (confirm) {
+        this.$axios.get('/api/user-manager/delete/' + user.id).then(response => {
+          if (response.data.status === "success") {
+            window.location.reload();
           } else {
-            // Ko tìm thấy kết quả
+            alert("Lỗi: " + response.data.message);
           }
         }).catch(error => {
-          alert("Lỗi khi tìm kiếm "+error);
+          alert("Lỗi khi xóa: " + error);
         })
-        e.preventDefault();
-
       }
     },
-    updated() {
-      if (this.$route.query.hasOwnProperty('page') && this.$route.query['page'] > 0) {
-        this.currentPage = this.$route.query['page'];
-      }
-      if (this.$store.state.usermanager.users.data.length > 0) {
-        //this.title = this.$store.state.usermanager.users.data[0].name;
-        if (this.$store.state.usermanager.users.next_page_url !== null) {
-          this.nextPage = parseInt(this.currentPage) + 1;
+    searchNow(e) {
+      this.title = "Tìm kiếm thành viên";
+      this.$axios.get('/api/user-manager/search?keyword=' + this.keyword).then(response => {
+        if (response.data.status === "success") {
+          this.$store.commit('usermanager/setUsers', response.data.data);
+        } else {
+          // Ko tìm thấy kết quả
         }
-        if (this.$store.state.usermanager.users.prev_page_url !== null) {
-          this.prevPage = parseInt(this.currentPage) - 1;
-        }
-      }
+      }).catch(error => {
+        alert("Lỗi khi tìm kiếm " + error);
+      })
+      e.preventDefault();
+
     }
+  },
+  updated() {
+    this.currentPage = parseInt(this.$route.query['page']);
   }
+}
 </script>
 <style>
-  .user-manager {
-    background: #FFF;
-    padding: 10px;
-  }
+.user-manager {
+  background: #FFF;
+  padding: 10px;
+}
 </style>

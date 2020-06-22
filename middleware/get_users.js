@@ -1,5 +1,5 @@
 export default function (context) {
-  let per_page = 10;
+  let per_page = 1;
   let url = 'api/user-manager?per_page='+per_page;
   if(context.route.params.id) {
     if(context.route.params.id === "0") {

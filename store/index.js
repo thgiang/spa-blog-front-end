@@ -2,7 +2,7 @@ export const state = () => ({
   api_token: '',
   categories: [],
   blogs: {
-    last_page: 10
+    last_page: 0
   },
   current_category: 0,
 })

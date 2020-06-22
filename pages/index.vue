@@ -9,7 +9,8 @@
       <div class="row">
         <div class="col-md-12 text-center">
           <paginate
-            :page-count="this.$store.state.blogs.last_page"
+            v-model="currentPage"
+            :page-count=parseInt(this.$store.state.blogs.last_page)
             :click-handler="goToPage"
             :prev-text="'Trang trước'"
             :next-text="'Trang tiếp'"
@@ -45,9 +46,7 @@
     data() {
       return {
         title: "",
-        currentPage: 1,
-        nextPage: 0,
-        prevPage: 0,
+        currentPage: 1
       }
     },
     methods: {
@@ -61,19 +60,9 @@
       }
     },
     updated() {
-      if (this.$route.query.hasOwnProperty('page') && this.$route.query['page'] > 0) {
-        this.currentPage = this.$route.query['page'];
-      }
-
+      this.currentPage = parseInt(this.$route.query['page']);
       if (this.$store.state.blogs.data.length > 0) {
         this.title = this.$store.state.blogs.data[0].category.name;
-
-        if (this.$store.state.blogs.next_page_url !== null) {
-          this.nextPage = parseInt(this.currentPage) + 1;
-        }
-        if (this.$store.state.blogs.prev_page_url !== null) {
-          this.prevPage = parseInt(this.currentPage) - 1;
-        }
       }
     }
   }

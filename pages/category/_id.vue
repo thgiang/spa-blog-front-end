@@ -8,12 +8,22 @@
     <div class="blog-page">
       <div class="row">
         <div class="col-md-12 text-center">
+          <paginate
+            v-model="currentPage"
+            :page-count="this.$store.state.blogs.last_page"
+            :click-handler="goToPage"
+            :prev-text="'Trang trước'"
+            :next-text="'Trang tiếp'"
+            :container-class="'my-pagination'">
+          </paginate>
+          <!--
           Trang {{this.currentPage}} trên tổng số {{this.$store.state.blogs.last_page}} trang.<br/>
           <nuxt-link :to="{ name: 'category-id', params: {id: $route.params.id}, query: { page: prevPage}}" v-if="prevPage !== 0">Trang trước
           </nuxt-link>
           &nbsp;
           <nuxt-link :to="{ name: 'category-id', params: {id: $route.params.id}, query: { page: nextPage}}" v-if="nextPage !== 0">Trang tiếp
           </nuxt-link>
+          -->
         </div>
       </div>
     </div>
@@ -22,20 +32,20 @@
 
 <script>
   import Logo from '~/components/Logo.vue'
-  import BlogItem from "~/components/BlogItem";
+  import BlogItem from "~/components/BlogItem"
+  import Paginate from 'vuejs-paginate'
 
   export default {
     middleware: ['get_blogs'],
     components: {
       BlogItem,
-      Logo
+      Logo,
+      Paginate
     },
     data() {
       return {
         title: "",
-        currentPage: 1,
-        nextPage: 0,
-        prevPage: 0,
+        currentPage: 1
       }
     },
     head() {
@@ -43,23 +53,18 @@
         title: this.title + ' - Blog GHTK'
       }
     },
+    methods: {
+      goToPage(p) {
+        this.$router.push({ name: 'category-id', params: {id: this.$route.params.id}, query: { page: p} })
+      }
+    },
     mounted() {
       this.$store.commit('setCurrentCategory', this.$route.params.id);
     },
     updated() {
-      if (this.$route.query.hasOwnProperty('page') && this.$route.query['page'] > 0) {
-        this.currentPage = this.$route.query['page'];
-      }
-
+      this.currentPage = parseInt(this.$route.query['page']);
       if (this.$store.state.blogs.data.length > 0) {
         this.title = this.$store.state.blogs.data[0].category.name;
-
-        if (this.$store.state.blogs.next_page_url !== null) {
-          this.nextPage = parseInt(this.currentPage) + 1;
-        }
-        if (this.$store.state.blogs.prev_page_url !== null) {
-          this.prevPage = parseInt(this.currentPage) - 1;
-        }
       }
     }
   }

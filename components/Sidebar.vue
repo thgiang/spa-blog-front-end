@@ -94,6 +94,8 @@
       isTabActive(category_id) {
         if (this.$route.name === 'blog-id' && this.$store.state.blog.blog.cat_id === category_id) {
           return true;
+        } else if (this.$route.name === 'category-id' && this.$route.params.id === category_id) {
+          return true;
         }
         return false;
       },

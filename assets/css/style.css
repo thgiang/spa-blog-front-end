@@ -30,8 +30,12 @@ a:hover {
   outline: none;
   color: white;
 }
-.my-pagination .active {
+.my-pagination .active a {
   background: #000;
+}
+.my-pagination .disabled a {
+  background: #a9a9a9;
+  cursor: not-allowed;
 }
 /* Overwrite Bootstrap CSS */
 .btn-lg, .btn-group-lg > .btn {
