@@ -18,7 +18,9 @@
         </h3>
         <p class="d-none d-sm-block blog-description" v-html="blog.description"></p>
         <div class="extra-info">
-          <span class="category">{{blog.cat_name}} • </span> <span class="category">{{blog.updated_at.substr(0, 10)}}</span>
+          <nuxt-link :to="{ name: 'category-id', params: {id: blog.cat_id}}" class="category">
+            <span>{{blog.cat_name}} • </span> <span class="category">{{blog.updated_at.substr(0, 10)}}</span>
+          </nuxt-link>
         </div>
       </div>
     </div>

@@ -1,7 +1,9 @@
 export default function (context) {
+  context.store.commit('search/clearResults')
+
   //let per_page = 10;
   let url = '';
-  if (!context.route.query.hasOwnProperty('keyword')) {
+  if (!context.route.query.hasOwnProperty('keyword') || context.route.query['keyword'] === "") {
     return context.redirect('/');
   }
 

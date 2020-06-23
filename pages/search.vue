@@ -66,18 +66,6 @@ export default {
   },
   updated() {
     this.currentPage = parseInt(this.$route.query['page']);
-
-    let blogTexts = document.getElementsByClassName("blog-text");
-    if(blogTexts) {
-      for(let i = 0; i < blogTexts.length; i++) {
-
-        let innerHTML = blogTexts.item(i).innerHTML;
-        let replace = this.$route.query['keyword'];
-        let regex = new RegExp(replace,"g");
-        innerHTML = innerHTML.replace(regex, '<span class="highlight">'+replace+'</span>');
-        blogTexts.item(i).innerHTML = innerHTML;
-      }
-    }
   }
 }
 </script>
