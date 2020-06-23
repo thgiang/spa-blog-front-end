@@ -1,14 +1,16 @@
 <template>
   <div class="search-form">
     <form @submit="searchNow" class="form-inline">
+      <!--
       <select class="form-control col-2" id="cat_id" name="cat_id" v-model="cat_id">
         <option value="0">Tất cả danh mục</option>
         <option v-for="category in this.$store.state.categories" :value="category.id">{{ category.name }}</option>
       </select>
-      <input type="text" class="form-control col-8" id="keyword" name="keyword" v-model="keyword"
+      -->
+      <input type="text" class="form-control col-sm-10 col-8" id="keyword" name="keyword" v-model="keyword"
              style="border-left: 1px solid #c5c5c5!important;"
              placeholder="Từ khóa tìm kiếm">
-      <button class="btn btn-danger col-2" type="submit">Tìm kiếm</button>
+      <button class="btn btn-danger col-sm-2 col-4" type="submit">Tìm kiếm</button>
     </form>
   </div>
 </template>
@@ -22,7 +24,8 @@ export default {
   },
   methods: {
     searchNow(e) {
-      this.$router.push({name: 'search', params: {}, query: {'cat_id': this.cat_id, 'keyword': this.keyword}});
+      //this.$router.push({name: 'search', params: {}, query: {'cat_id': this.cat_id, 'keyword': this.keyword}});
+      this.$router.push({name: 'search', params: {}, query: {'keyword': this.keyword}});
       e.preventDefault();
     }
   }

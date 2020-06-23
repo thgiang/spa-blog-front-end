@@ -1,8 +1,20 @@
 <template>
   <div>
+    <div class="search-area">
+      <div class="row">
+        <div class="col-md-12">
+          <SearchBar></SearchBar>
+        </div>
+      </div>
+    </div>
+
+    <div style="padding: 10px">
+      <h1>Kết quả tìm kiếm: {{this.$route.query["keyword"]}}</h1>
+    </div>
+
     <div class="blog-list">
-      <template v-for="(blog, index) in this.$store.state.blogs.data">
-        <BlogItem v-bind:blog="blog"/>
+      <template v-for="(result, index) in this.$store.state.search.results.hits.hits">
+        <BlogItem v-bind:blog="result._source"/>
       </template>
     </div>
     <div class="blog-page">
@@ -10,7 +22,7 @@
         <div class="col-md-12 text-center">
           <paginate
             v-model="currentPage"
-            :page-count="this.$store.state.blogs.last_page"
+            :page-count="Math.ceil(this.$store.state.search.results.hits.total.value/10)"
             :click-handler="goToPage"
             :prev-text="'Trang trước'"
             :next-text="'Trang tiếp'"
@@ -26,13 +38,15 @@
 import Logo from '~/components/Logo.vue'
 import BlogItem from "~/components/BlogItem"
 import Paginate from 'vuejs-paginate'
+import SearchBar from '~/components/Searchbar'
 
 export default {
   middleware: ['get_blogs_by_keyword'],
   components: {
     BlogItem,
     Logo,
-    Paginate
+    Paginate,
+    SearchBar
   },
   data() {
     return {
@@ -47,16 +61,22 @@ export default {
   },
   methods: {
     goToPage(p) {
-      this.$router.push({ name: 'category-id', params: {id: this.$route.params.id}, query: { page: p} })
+      this.$router.push({ name: 'search', query: { keyword: this.$route.query['keyword'], page: p} })
     }
-  },
-  mounted() {
-    this.$store.commit('setCurrentCategory', this.$route.params.id);
   },
   updated() {
     this.currentPage = parseInt(this.$route.query['page']);
-    if (this.$store.state.blogs.data.length > 0) {
-      this.title = this.$store.state.blogs.data[0].category.name;
+
+    let blogTexts = document.getElementsByClassName("blog-text");
+    if(blogTexts) {
+      for(let i = 0; i < blogTexts.length; i++) {
+
+        let innerHTML = blogTexts.item(i).innerHTML;
+        let replace = this.$route.query['keyword'];
+        let regex = new RegExp(replace,"g");
+        innerHTML = innerHTML.replace(regex, '<span class="highlight">'+replace+'</span>');
+        blogTexts.item(i).innerHTML = innerHTML;
+      }
     }
   }
 }

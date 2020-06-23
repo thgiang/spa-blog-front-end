@@ -37,6 +37,13 @@ a:hover {
   background: #a9a9a9;
   cursor: not-allowed;
 }
+.highlight {
+  background: yellow;
+  color: black;
+}
+.search-area {
+  margin: 10px;
+}
 /* Overwrite Bootstrap CSS */
 .btn-lg, .btn-group-lg > .btn {
   font-size: 1rem;

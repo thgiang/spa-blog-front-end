@@ -3,7 +3,7 @@
     <div class="search-area">
       <div class="row">
         <div class="col-md-12">
-          <Searchbar></Searchbar>
+          <SearchBar></SearchBar>
         </div>
       </div>
     </div>
@@ -44,7 +44,7 @@
   import Logo from '~/components/Logo.vue'
   import BlogItem from "~/components/BlogItem"
   import Paginate from 'vuejs-paginate'
-  import Searchbar from '~/components/Searchbar.vue'
+  import SearchBar from '~/components/Searchbar'
 
   export default {
     middleware: ['get_blogs'],
@@ -52,7 +52,7 @@
       BlogItem,
       Logo,
       Paginate,
-      Searchbar
+      SearchBar
     },
     data() {
       return {
@@ -80,9 +80,6 @@
 </script>
 
 <style scoped>
-.search-area {
-  margin: 10px;
-}
   .blog-list {
     font-size: 12px;
     overflow: hidden;
