@@ -44,7 +44,25 @@ a:hover {
 .search-area {
   margin: 10px;
 }
-/* Overwrite Bootstrap CSS */
+.blog-content {
+  overflow: hidden;
+  position: relative;
+}
+.blog-content img{
+  max-width: calc(100% - 20px)!important;
+}
+.cursor-pointer {
+  cursor: pointer;
+}
+
+
+
+
+
+
+
+
+  /* Overwrite Bootstrap CSS */
 .btn-lg, .btn-group-lg > .btn {
   font-size: 1rem;
   border-radius: 5px;

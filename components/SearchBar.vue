@@ -8,7 +8,7 @@
       </select>
       -->
       <input type="text" class="form-control col-sm-10 col-8" id="keyword" name="keyword" v-model="keyword"
-             style="border-left: 1px solid #c5c5c5!important;"
+             style="border: 1px solid rgb(232, 232, 232)!important;"
              placeholder="Từ khóa tìm kiếm">
       <button class="btn btn-danger col-sm-2 col-4" type="submit">Tìm kiếm</button>
     </form>
@@ -33,7 +33,7 @@ export default {
 </script>
 <style>
 .search-form {
-  background: green;
+  background: #FFF;
   padding: 10px;
 }
 

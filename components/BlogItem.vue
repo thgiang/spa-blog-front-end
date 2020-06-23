@@ -1,5 +1,5 @@
 <template>
-  <div class="blog-item">
+  <div class="blog-item" :class="{'blog-item-deleted': isDeleted}">
     <div class="row">
       <div class="col-4 blog-image">
         <nuxt-link :to="{ name: 'blog-id', params: {id: blog.id}}">
@@ -8,7 +8,8 @@
       </div>
       <div class="col-8 blog-text">
         <div v-if="this.$store.state.auth.user.role === 'admin' || (this.$store.state.auth.user.role === 'writer' && blog.user_id === this.$store.state.auth.user.id)" class="float-right">
-          <nuxt-link :to="{name: 'blog-manager-edit-id', params: {id: blog.id}}" class="bg-danger p-1 text-white">Sửa bài viết</nuxt-link>
+          <nuxt-link :to="{name: 'blog-manager-edit-id', params: {id: blog.id}}" class="bg-success p-1 text-white">Sửa</nuxt-link>
+          <span v-if="this.$store.state.auth.user.role === 'admin'" @click="deleteBlog(blog.id)" class="cursor-pointer bg-danger p-1 text-white">Xóa</span>
         </div>
         <h3>
           <nuxt-link :to="{ name: 'blog-id', params: {id: blog.id}}">
@@ -27,14 +28,33 @@
   export default {
     name: 'blog-item',
     props: ['blog'],
+    data() {
+      return {
+        isDeleted: false
+      }
+    },
     methods: {
-      imageUrlAlt(event) {
-        event.target.src = "~assets/images/alt-image.jpg"
+      deleteBlog(blog_id) {
+        let confirm = window.confirm("Bạn có chắc muốn xóa bài viết này không?");
+        if (confirm) {
+          let self = this;
+          this.$axios.get('/api/blog-manager/delete/' + blog_id)
+            .then((response) => {
+              self.isDeleted = true;
+            }, (error) => {
+              console.log(error);
+            })
+        }
       }
     }
   }
 </script>
 <style>
+  .blog-item-deleted {
+    background: #ffa8a8!important;
+    display: none;
+    transition: 1s;
+  }
   .blog-item {
     width: calc(100% - 20px);
     margin: 10px;

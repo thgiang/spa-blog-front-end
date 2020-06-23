@@ -1,9 +1,9 @@
 <template>
   <div>
     <!--<a href="/" v-if="showingSmallLogo">-->
-    <a href="/">
+    <nuxt-link to="/">
       <img src="~assets/images/small_logo.png" title="Small logo" alt="Small logo" class="small-logo"/>
-    </a>
+    </nuxt-link>
     <ul v-if="this.$store.state.auth.user.role === 'admin' || this.$store.state.auth.user.role === 'writer'" class="manager-menu">
       <li v-if="this.$store.state.auth.user.role === 'admin'">
         <span class="admin-protect-icon">
@@ -20,7 +20,7 @@
           QL thành viên
         </nuxt-link>
       </li>
-      <li class="wtf-mobile-issue">
+      <li class="wtf-mobile-issue" v-if="this.$store.state.auth.user.role === 'admin'">
         <span class="admin-protect-icon">
           Admin
         </span>
